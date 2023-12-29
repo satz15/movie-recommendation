@@ -1,5 +1,6 @@
 import Logo from '../assets/images/movie-logo.jpg'
 import { GoSearch } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -10,16 +11,16 @@ const Navbar = () => {
 
          <div className='flex flex-row justify-around gap-6 items-center'>
          <span className="cursor-pointer text-xl ">
-          Home
+         <Link to='/home-page'>Home</Link>
         </span>
         <span className="cursor-pointer text-xl ">
-          Movies
+         <Link to='/movie'>Movies</Link> 
         </span>
         <span className="cursor-pointer text-xl ">
-          Tv Shows
+         <Link to='tv'>Tv Shows </Link> 
         </span>
         <span className="cursor-pointer text-xl ">
-          Favourites
+         <Link to='favourites'>Favourites</Link> 
         </span>
          </div>
 
