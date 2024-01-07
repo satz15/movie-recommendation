@@ -6,3 +6,12 @@
     background-image: url(./assets/images/movie-login.jpg);
     background-size:cover;
 }
+
+/* .background{
+   background-image: url(https://thedrum-media.imgix.net/thedrum-prod/s3/news/tmp/10557/netflixa.jpg?w=1280&ar=default&fit=crop&crop=faces,edges&auto=format);
+   background-size: cover;
+   backdrop-filter: blur(3px);
+   width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+} */
