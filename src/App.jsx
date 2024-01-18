@@ -11,25 +11,40 @@ import {SingleMovie} from "./components/singlemovie"
 
 function App() {
 
-  // data
-  const [ data, setData] = useState([])
+  const [ data, setData,] = useState([])
+  const [isLoading,setIsLoading] = useState(false);
+  const [page,setPage] = useState(1);
+
+
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYjhhNGM5MWMxZTY0Y2UyNGI3ZjdlMjUyNzc4MzZiMiIsInN1YiI6IjY1OTUwZTdjZDdhNzBhMTFjNzY5MzFmZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HgU4MUOWBdZf-S5TF-J-vhTH5Rc_hsdxhYz1JIU1xHQ'
+      Authorization: 'Bearer 0b8a4c91c1e64ce24b7f7e25277836b2'
     }
   };
 
-  
 
-  useEffect(()=>{
-    
-    fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options)
-      .then(response => response.json())
-      .then(response => (setData(response),console.log(response)))
-      .catch(err => console.error(err));
-  },[])
+  const fetchData = async()=> {
+    console.log("inside fetch")
+    setIsLoading(true);
+    try{
+        const response = await fetch(`https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=0b8a4c91c1e64ce24b7f7e25277836b2&page=${page}`,options);
+        const result = await response.json();
+        console.log(result)
+        setData([...data,...result.results])
+        setPage(previous = previous+1)
+    } catch (err){
+        console.log(err);
+    }finally {
+        setIsLoading(false);
+    }
+}
+useEffect(()=>{
+  console.log("hit");
+  fetchData();
+},[])
+
 
   return (
     <div className="w-[100vw]">
@@ -40,7 +55,7 @@ function App() {
       <Route path='/home-page' element={<Home/>}/>
       <Route 
       path='/movie' 
-      element={<Movies data={data}/>} 
+      element={<Movies />} 
       children={
         [
           // {
@@ -49,7 +64,7 @@ function App() {
           // }
         ]
       }/>
-      <Route path='/tv' element={<Tv/>}/>
+      <Route path='/tv' element={<Tv data={data} setData={setData} fetchData={fetchData} isLoading = {isLoading} setIsLoading={setIsLoading} page={page} setPage={setPage}/>}/>
       <Route path='/favourites' element={<Favourites/>}/>
       <Route path="/sign" element={<Login/>}/>
      </Routes>
