@@ -1,7 +1,12 @@
 
+import Navbar from "./navbar";
 
 const Home = () => {
     return ( 
+
+      <div>
+
+      <Navbar/>
         <div className="parent">
          <div className="background"></div>
             <div className="flex flex-col text-violet-50 items-center justify-center pb-6 gap-8 min-h-screen child">
@@ -18,6 +23,7 @@ const Home = () => {
           </div>
         </div>
         </div>
+         </div>
      );
 }
  

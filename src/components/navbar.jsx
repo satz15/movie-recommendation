@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GoSearch, GoX } from 'react-icons/go'; 
+import { HiLogout } from "react-icons/hi";
 import Logo from '../assets/images/movie-logo.jpg';
 
 const Navbar = () => {
@@ -15,12 +16,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className='bg-black font-normal text-white w-full h-[3.5rem] flex flex-row justify-between px-20 items-center relative'>
+    <div className='bg-black font-normal text-white w-full h-[3.5rem] flex flex-row justify-around gap-16 px-20 items-center relative'>
       <div>
         <img className='h-[3.5rem] cursor-pointer' src={Logo} alt="Logo" />
       </div>
 
-      <div className='flex flex-row justify-around gap-6 items-center'>
+      <div className='flex flex-row justify-around gap-10 items-center'>
         <span className="cursor-pointer text-xl">
           <Link to='/home-page'>Home</Link>
         </span>
@@ -28,10 +29,10 @@ const Navbar = () => {
           <Link to='/movie'>Movies</Link>
         </span>
         <span className="cursor-pointer text-xl">
-          <Link to='tv'>Tv Shows</Link>
+          <Link to='/tv-shows'>Tv Shows</Link>
         </span>
         <span className="cursor-pointer text-xl">
-          <Link to='favourites'>Favourites</Link>
+          <Link to='/favourites'>Favourites</Link>
         </span>
       </div>
 
@@ -55,6 +56,17 @@ const Navbar = () => {
           </div>
         </div>
       )}
+<Link to='/logout'>
+<div className="flex items-center "> 
+  
+      <button
+        className=" text-white px-4 py-2 rounded-md" >
+        Logout
+      </button>
+      <HiLogout />
+      
+    </div>
+    </Link>
     </div>
   );
 };
