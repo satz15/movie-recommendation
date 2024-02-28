@@ -5,6 +5,8 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
 
   const [formFields, setFormFields] = useState({
     displayName: "",
@@ -26,6 +28,10 @@ export const UserProvider = ({ children }) => {
         setUser,
         formFields,
         setFormFields,
+        data,
+        setData,
+        query,
+        setQuery,
       }}
     >
       {children}

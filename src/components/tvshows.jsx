@@ -1,81 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import Navbar from "./navbar";
+import { useFavorites } from "../context/favouritecontext";
 
 const Tv = ({
   data,
-  setData,
   fetchData,
   isLoading,
-  setIsLoading,
-  page,
   setPage,
 }) => {
-  // const [ data, setData,] = useState([])
-  // const [isLoading,setIsLoading] = useState(false);
-  // const [page,setPage] = useState(1);
+  const { favorites, addToFavorites } = useFavorites();
 
-  // const options = {
-  //     method: 'GET',
-  //     headers: {
-  //       accept: 'application/json',
-  //       Authorization: 'Bearer 0b8a4c91c1e64ce24b7f7e25277836b2'
-  //     }
-  //   };
+  const handleAddToFavorites = (ele) => {
+    const isAlreadyAdded = favorites.some((fav) => fav.id === ele.id);
+    if (isAlreadyAdded) {
+      alert("This TV show is already added to favorites.");
+    } else {
+      addToFavorites(ele);
+    }
+  };
 
-  // const fetchData = async()=> {
-  //     console.log("inside fetch")
-  //     setIsLoading(true);
-  //     try{
-  //         const response = await fetch(`https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=0b8a4c91c1e64ce24b7f7e25277836b2&page=${page}`,options);
-  //         const result = await response.json();
-  //         console.log(result)
-  //         setData(prev => {
-  //             console.log("old data",prev)
-  //             return [...prev,...result.results];
-  //             // prev.results = [prev.results,result.results]
-  //         })
-  //         setPage(previous=> previous+1)
-  //     } catch (err){
-  //         console.log(err);
-  //     }finally {
-  //         setIsLoading(false);
-  //       }
-  // }
-  // console.log(data)
   const handleScroll = () => {
-    console.log("i am handlescroll");
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
-      isLoading
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
     ) {
-      return;
+      setPage((prev) => prev + 1);
     }
     fetchData();
   };
 
   useEffect(() => {
-    console.log("sec effect");
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isLoading]);
 
-  //   useEffect(()=>{
-  //     console.log("hit");
-  //     fetchData();
-  //   },[])
-
-  console.log(data);
   const imgPath = "https://image.tmdb.org/t/p/w1280";
 
   return (
     <div>
       <Navbar />
-      <div
-        className="bg-black w-[100%] min-h-[100]  flex flex-row flex-wrap
-        items-center gap-4 shadow-lg overflow-hidden justify-evenly"
-      >
+      <div className="bg-black w-full min-h-screen flex flex-row flex-wrap items-center gap-4 shadow-lg overflow-hidden justify-evenly">
         {data &&
           data.map((ele, ind) => {
             return (
@@ -89,8 +54,8 @@ const Tv = ({
                   alt="image"
                 />
                 <button
-                  onClick={() => addToFavorites(ele)}
-                  className="absolute top-96 right-6 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300"
+                  onClick={() => handleAddToFavorites(ele)}
+                  className="absolute bottom-12 right-5 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300"
                 >
                   <FaHeart />
                 </button>

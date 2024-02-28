@@ -7,7 +7,6 @@ import Movies from "./components/movies";
 import Tv from "./components/tvshows";
 import Favourites from "./components/favourites";
 import { useEffect, useState } from "react";
-import { SingleMovie } from "./components/singlemovie";
 
 function App() {
   const [data, setData] = useState([]);
@@ -47,25 +46,14 @@ function App() {
   }, []);
 
   return (
-    <div className="w-[100vw]">
+    <div className="w-[100%]">
       {/* <Navbar/> */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Signup />} />
 
         <Route path="/home-page" element={<Home />} />
-        <Route
-          path="/movie"
-          element={<Movies />}
-          children={
-            [
-              // {
-              //   path: "/movie:movieId",
-              //   element: <SingleMovie />,
-              // }
-            ]
-          }
-        />
+        <Route path="/movie" element={<Movies />} />
         <Route
           path="/tv-shows"
           element={
