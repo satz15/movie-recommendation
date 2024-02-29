@@ -7,6 +7,7 @@ import Movies from "./components/movies";
 import Tv from "./components/tvshows";
 import Favourites from "./components/favourites";
 import { useEffect, useState } from "react";
+import Moviedetails from "./components/moviedetails";
 
 function App() {
   const [data, setData] = useState([]);
@@ -72,6 +73,7 @@ function App() {
         <Route path="/home-page" element={<Home />} />
         <Route path="/logout" element={<Login />} />
         <Route path="/sign" element={<Login />} />
+        <Route path="/movies/:id" element={<Moviedetails/>} />
       </Routes>
     </div>
   );

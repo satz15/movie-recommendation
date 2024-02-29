@@ -3,6 +3,7 @@ import { FaHeart } from "react-icons/fa";
 import Navbar from "./navbar";
 import { useUser } from "./context";
 import { useFavorites } from "../context/favouritecontext";
+import { Link } from "react-router-dom";
 
 const Movies = () => {
   // data
@@ -95,19 +96,25 @@ const Movies = () => {
                 className="relative w-[20rem] rounded-lg hover:scale-105 transition duration-150  px-4 mt-4 mb-8"
                 key={ind}
               >
-                <img
-                  className="rounded-lg"
-                  src={imgPath + ele.poster_path}
-                  alt="image"
-                />
+                <Link to={`/movies/${ele.id}`} className="block">
+                  <img
+                    className="rounded-lg"
+                    src={imgPath + ele.poster_path}
+                    alt="image"
+                  />
+                  <div className="text-xl text-cyan-50 mt-2 mb-2">
+                    {ele.original_title}
+                  </div>
+                </Link>
                 <button
-              onClick={() => handleAddToFavorites(ele)}
-              className="absolute bottom-12 right-5 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300">
-             <FaHeart />
-             </button>
-                <div className="text-xl text-cyan-50 mt-2 mb-2">
+                  onClick={() => handleAddToFavorites(ele)}
+                  className="absolute bottom-12 right-5 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300"
+                >
+                  <FaHeart />
+                </button>
+                {/* <div className="text-xl text-cyan-50 mt-2 mb-2">
                   {ele.original_title}
-                </div>
+                </div> */}
               </div>
             );
           })}
