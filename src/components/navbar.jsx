@@ -21,9 +21,9 @@ const Navbar = () => {
 
   return (
     <div className="bg-black font-normal text-white w-full h-[3.5rem] flex flex-row justify-around gap-16 px-20 items-center relative">
-      <div>
+      <Link to="/home-page">
         <img className="h-[3.5rem] cursor-pointer" src={Logo} alt="Logo" />
-      </div>
+      </Link>
 
       <div className="flex flex-row justify-around gap-10 items-center">
         <span className="cursor-pointer text-xl">

@@ -51,7 +51,7 @@ const Login = () => {
             id="username"
             name="email"
             onChange={changeHandler}
-            className="w-full p-2 mt-1  bg-zinc-800 focus:outline-none focus:ring focus:border-stone-950 rounded-md"
+            className="w-full p-2 mt-1 text-white bg-zinc-800 focus:outline-none focus:ring focus:border-stone-950 rounded-md"
           />
         </div>
         <div className="mb-4">
@@ -63,17 +63,19 @@ const Login = () => {
             id="password"
             name="password"
             onChange={changeHandler}
-            className="w-full p-2 mt-1  bg-zinc-800 focus:outline-none focus:ring focus:border-blue-300 rounded-md"
+            className="w-full p-2 mt-1 text-white bg-zinc-800 focus:outline-none focus:ring focus:border-blue-300 rounded-md"
           />
         </div>
         <div className="flex gap-4">
-          <button
-            type="button"
-            onClick={submitHandler}
-            className="w-full py-2 mt-4 text-white bg-rose-900 rounded-md  focus:outline-none"
-          >
-            <Link to="/home-page">Login</Link>
-          </button>
+          <Link to="/home-page">
+            <button
+              type="button"
+              onClick={submitHandler}
+              className="` py-2 mt-4 w-[28rem] text-white bg-rose-900 rounded-md  focus:outline-none"
+            >
+              <span>Login</span>
+            </button>
+          </Link>
         </div>
         <div className="flex items-center mt-6 justify-evenly">
           <p className="text-white">New user?</p>

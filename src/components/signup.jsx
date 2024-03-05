@@ -75,7 +75,7 @@ const Signup = () => {
             id="display-name"
             name="displayName"
             onChange={changeHandler}
-            className="w-full p-2  border-gray-300 rounded-md  bg-zinc-800  focus:outline-none focus:ring focus:border-black"
+            className="w-full p-2  border-gray-300 rounded-md text-white bg-zinc-800  focus:outline-none focus:ring focus:border-black"
             required
           />
         </div>
@@ -91,7 +91,7 @@ const Signup = () => {
             id="email"
             name="email"
             onChange={changeHandler}
-            className="w-full p-2  border-gray-300  bg-zinc-800 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full p-2  border-gray-300 text-white bg-zinc-800 rounded-md focus:outline-none focus:ring focus:border-blue-300"
             required
           />
         </div>
@@ -107,7 +107,7 @@ const Signup = () => {
             id="password"
             name="password"
             onChange={changeHandler}
-            className="w-full p-2  border-gray-300 bg-zinc-800  rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full p-2  border-gray-300 text-white bg-zinc-800  rounded-md focus:outline-none focus:ring focus:border-blue-300"
             required
           />
         </div>
@@ -123,7 +123,7 @@ const Signup = () => {
             id="confirmPassword"
             name="confirmPassword"
             onChange={changeHandler}
-            className="w-full p-2  border-gray-300 bg-zinc-800  rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full p-2  border-gray-300 text-white bg-zinc-800  rounded-md focus:outline-none focus:ring focus:border-blue-300"
             required
           />
         </div>

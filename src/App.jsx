@@ -8,6 +8,7 @@ import Tv from "./components/tvshows";
 import Favourites from "./components/favourites";
 import { useEffect, useState } from "react";
 import Moviedetails from "./components/moviedetails";
+import Tvdetails from "./components/tvdetails";
 
 function App() {
   const [data, setData] = useState([]);
@@ -32,14 +33,20 @@ function App() {
       );
       const result = await response.json();
       console.log(result);
-      setData([...data, ...result.results]);
-      setPage((page) => page + 1);
+      if (result.results && Array.isArray(result.results)) {
+        // Check if result.results is iterable and an array
+        setData((prevData) => [...prevData, ...result.results]);
+        setPage((prevPage) => prevPage + 1);
+      } else {
+        console.error("Error: Result is not iterable or not an array.");
+      }
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     console.log("hit");
@@ -74,6 +81,7 @@ function App() {
         <Route path="/logout" element={<Login />} />
         <Route path="/sign" element={<Login />} />
         <Route path="/movies/:id" element={<Moviedetails/>} />
+        <Route path="/tv/:id" element={<Tvdetails/>} />
       </Routes>
     </div>
   );

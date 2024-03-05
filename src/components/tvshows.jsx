@@ -1,14 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import Navbar from "./navbar";
 import { useFavorites } from "../context/favouritecontext";
+import { Link } from "react-router-dom";
 
-const Tv = ({
-  data,
-  fetchData,
-  isLoading,
-  setPage,
-}) => {
+const Tv = ({ data, fetchData, isLoading, setPage }) => {
   const { favorites, addToFavorites } = useFavorites();
 
   const handleAddToFavorites = (ele) => {
@@ -30,6 +26,7 @@ const Tv = ({
     fetchData();
   };
 
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -48,20 +45,23 @@ const Tv = ({
                 className="relative w-[20rem] p-3 gap-1 rounded-lg hover:scale-105 transition duration-150 shadow-lg px-6 mt-4 mb-8"
                 key={ind}
               >
-                <img
-                  className="rounded-lg"
-                  src={imgPath + ele.poster_path}
-                  alt="image"
-                />
+                <Link to={`/tv/${ele.id}`} className="block">
+                  <img
+                    className="rounded-lg"
+                    src={imgPath + ele.poster_path}
+                    alt="image"
+                  />
+
+                  <div className="text-xl text-cyan-50 mt-2 mb-2">
+                    {ele.original_name}
+                  </div>
+                </Link>
                 <button
                   onClick={() => handleAddToFavorites(ele)}
                   className="absolute bottom-12 right-5 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300"
                 >
                   <FaHeart />
                 </button>
-                <div className="text-xl text-cyan-50 mt-2 mb-2">
-                  {ele.original_name}
-                </div>
               </div>
             );
           })}
