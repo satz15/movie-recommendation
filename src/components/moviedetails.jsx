@@ -29,7 +29,7 @@ const Moviedetails = () => {
           `https://api.themoviedb.org/3/movie/${id}/credits?api_key=0b8a4c91c1e64ce24b7f7e25277836b2`
         );
         const data = await response.json();
-        setCast(data.cast.slice(0, 10)); 
+        setCast(data.cast.slice(0, 10));
       } catch (error) {
         console.error("Error fetching cast details:", error);
       }
@@ -45,7 +45,7 @@ const Moviedetails = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex justify-center items-center"
+      className="h-full bg-cover bg-center flex justify-center items-center"
       style={{
         backgroundImage: `url(${imgPath}${movieDetails.backdrop_path})`,
       }}
