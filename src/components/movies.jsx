@@ -7,8 +7,13 @@ import { Link } from "react-router-dom";
 
 const Movies = () => {
   // data
-  const { data, setData, query } = useUser();
-  // const [data, setData] = useState([]);
+  const {
+    movieData,
+    setMovieData,
+    query,
+    setQuery,
+  } = useUser();
+
   const [isLoading, setIsLoading] = useState(false);
   const [moviepage, setMoviePage] = useState(1);
   const { favorites, addToFavorites } = useFavorites();
@@ -30,7 +35,6 @@ const Movies = () => {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYjhhNGM5MWMxZTY0Y2UyNGI3ZjdlMjUyNzc4MzZiMiIsInN1YiI6IjY1OTUwZTdjZDdhNzBhMTFjNzY5MzFmZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HgU4MUOWBdZf-S5TF-J-vhTH5Rc_hsdxhYz1JIU1xHQ",
     },
   };
-  
 
   const handleScroll = () => {
     if (
@@ -51,8 +55,10 @@ const Movies = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(data);
-      setData([...data, ...result.results]);
+      // console.log(data);
+      console.log(movieData);
+      // setData([...data, ...result.results]);
+      setMovieData([...movieData, ...result.results]);
       setMoviePage((page) => page + 1);
     } catch (err) {
       console.log(err);
@@ -61,12 +67,9 @@ const Movies = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
-    setData([]);
+    setMovieData([]);
     fetchData();
   }, [query]);
 
@@ -79,17 +82,13 @@ const Movies = () => {
   // console.log(data.results);
   const imgPath = "https://image.tmdb.org/t/p/w1280";
 
-  // const addToFavorites = (movie) => {
-  //   setFavorites([...favorites, movie]);
-  //   console.log("Added to favorites:", movie);
-  // };
 
   return (
     <div>
       <Navbar />
       <div className="bg-black w-[100%] min-h-[100] flex flex-row flex-wrap items-center gap-4 shadow-lg overflow-hidden justify-evenly">
-        {data &&
-          data?.map((ele, ind) => {
+        {movieData &&
+          movieData?.map((ele, ind) => {
             return (
               <div
                 className="relative w-[20rem] rounded-lg hover:scale-105 transition duration-150  px-4 mt-4 mb-8"
@@ -101,19 +100,16 @@ const Movies = () => {
                     src={imgPath + ele.poster_path}
                     alt="image"
                   />
-                  <div className="text-xl text-cyan-50 mt-2 mb-2">
+                  <div className="mt-2 mb-2 text-xl text-cyan-50">
                     {ele.original_title}
                   </div>
                 </Link>
                 <button
                   onClick={() => handleAddToFavorites(ele)}
-                  className="absolute bottom-12 right-5 bg-rose-900 text-white px-4 py-2 rounded-full hover:bg-rose-950 transition duration-300"
+                  className="absolute px-4 py-2 text-white transition duration-300 rounded-full bottom-12 right-5 bg-rose-900 hover:bg-rose-950"
                 >
                   <FaHeart />
                 </button>
-                {/* <div className="text-xl text-cyan-50 mt-2 mb-2">
-                  {ele.original_title}
-                </div> */}
               </div>
             );
           })}
