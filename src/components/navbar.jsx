@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GoSearch, GoX } from "react-icons/go";
 import { HiLogout } from "react-icons/hi";
 import Logo from "../assets/images/movie-logo.jpg";
 import { useUser } from "./context";
 
 const Navbar = () => {
-
-  const {
-    movieData,
-    setMovieData,
-    tvData,
-    setTvData,
-    query,
-    setQuery,
-  } = useUser();
+  const { setMovieData, setTvData, query, setQuery } = useUser();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const location = useLocation();
 
   const handleSearchClick = () => {
     setIsSearchOpen(!isSearchOpen);
@@ -30,6 +23,8 @@ const Navbar = () => {
       setQuery("");
     }
   }, [query, setQuery]);
+
+  const isHomePage = location.pathname === "/home-page";
 
   return (
     <div className="bg-black font-normal text-white w-full h-[3.5rem] flex flex-row justify-around gap-16 px-20 items-center relative">
@@ -52,16 +47,18 @@ const Navbar = () => {
         </span>
       </div>
 
-      <div
-        className="flex items-center cursor-pointer"
-        onClick={handleSearchClick}
-      >
-        {isSearchOpen ? (
-          <GoX className="h-[1.5rem] w-[2rem]" />
-        ) : (
-          <GoSearch className="h-[1.5rem] w-[2rem]" />
-        )}
-      </div>
+      {!isHomePage && ( 
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={handleSearchClick}
+        >
+          {isSearchOpen ? (
+            <GoX className="h-[1.5rem] w-[2rem]" />
+          ) : (
+            <GoSearch className="h-[1.5rem] w-[2rem]" />
+          )}
+        </div>
+      )}
 
       {isSearchOpen && (
         <div className="absolute top-[3.5rem] left-0 right-0 mt-2 p-4 bg-opacity-20 border-none rounded shadow-lg z-10">
@@ -83,6 +80,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
       <Link to="/logout">
         <div className="flex items-center ">
           <button className="px-4 py-2 text-white rounded-md ">Logout</button>

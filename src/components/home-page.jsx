@@ -1,6 +1,9 @@
 import Navbar from "./navbar";
+import { useUser } from "./context";
 
 const Home = () => {
+  const { movieData, setMovieData, query, setQuery } = useUser();
+
   return (
     <div>
       <Navbar />
