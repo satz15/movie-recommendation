@@ -46,7 +46,6 @@ function App() {
       setIsLoading(false);
     }
   };
-  
 
   useEffect(() => {
     console.log("hit");
@@ -80,8 +79,8 @@ function App() {
         <Route path="/home-page" element={<Home />} />
         <Route path="/logout" element={<Login />} />
         <Route path="/sign" element={<Login />} />
-        <Route path="/movies/:id" element={<Moviedetails/>} />
-        <Route path="/tv/:id" element={<Tvdetails/>} />
+        <Route path="/movies/:id" element={<Moviedetails />} />
+        <Route path="/tv/:id" element={<Tvdetails />} />
       </Routes>
     </div>
   );
