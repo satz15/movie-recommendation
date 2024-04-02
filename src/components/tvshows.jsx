@@ -7,13 +7,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "./context";
 
 const Tv = () => {
-
-  const {
-    tvData,
-    setTvData,
-    query,
-    setQuery,
-  } = useUser();
+  const { tvData, setTvData, query, setQuery } = useUser();
 
   const { favorites, addToFavorites } = useFavorites();
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +35,7 @@ const Tv = () => {
       console.log(tvData);
       // setData([...data, ...result.results]);
       setTvData([...tvData, ...result.results]);
-      setMoviePage((page) => page + 1);
+      // setMoviePage((page) => page + 1);
     } catch (err) {
       console.log(err);
     } finally {
